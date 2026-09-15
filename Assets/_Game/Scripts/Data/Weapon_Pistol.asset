@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94fcf6bf6b78f738836a64764d5644c, type: 3}
+  m_Name: Weapon_Pistol
+  m_EditorClassIdentifier: Assembly-CSharp::DeadDawn.Data.WeaponData
+  weaponName: Tactical Pistol
+  weaponType: 0
+  effectiveRange: 8.5
+  minimumRange: 0
+  fieldOfFireAngle: 60
+  fireRate: 0.25
+  damage: 25
+  bulletSpeed: 32
+  maxAmmoCapacity: 120
+  defaultStartingAmmo: 30
+  screenShakeIntensity: 0.08
+  screenShakeDuration: 0.06

@@ -89,7 +89,7 @@ flowchart TD
 - **The Day-1 Hook (Immediate Mastery)**:  
   Transitioning from a vulnerable vagrant with an open perimeter to a fortified bunker commander with an automated turret (`Watchtower.cs`), an interactive locking gate (`BaseGate.cs`), and a stocked safe stash.
 - **Mid-Term Metagame (Weeks 1 – 4: Sector Expansion & Tech Trees)**:
-  - *Outpost Blueprints*: Progressing through 5 base tiers (Makeshift Camp $\rightarrow$ Timber Palisade $\rightarrow$ Concrete Stronghold $\rightarrow$ Electrified Citadel $\rightarrow$ Autonomous Fortress).
+  - *Outpost Blueprints*: Progressing through 5 base tiers (Makeshift Camp → Timber Palisade → Concrete Stronghold → Electrified Citadel → Autonomous Fortress).
   - *Specialized Workbench Modules*: Upgrading the crafting bench to unlock Molotov Cocktails, Barbed Wire Electric Fences, and Shotgun Munitions.
   - *Survivor Encampment*: Finding and rescuing NPC survivors during daytime scavenging runs. Each survivor provides passive shelter perks (e.g., an Engineer who automatically repairs walls over real-world hours; an Armorer who doubles gunpowder efficiency).
 - **Long-Term Metagame (Months 2 – 6: Expedition Seasons & Blood Moons)**:
@@ -100,25 +100,12 @@ flowchart TD
 
 ### 5. Fair Monetization Strategy (Zero Cash-Grab Mechanics)
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                   DEAD DAWN MONETIZATION MATRIX                        │
-├───────────────────┬────────────────────────────────────────────────────┤
-│ 1. Battle Pass    │ "Outpost Supply Log" ($9.99/mo)                    │
-│    (Core Revenue) │ 80% Cosmetics (Timber Bunker skins, weapon wraps) │
-│                   │ 20% Convenience (Expanded stash slots, camp flags) │
-├───────────────────┼────────────────────────────────────────────────────┤
-│ 2. Rewarded Ads   │ Emergency Radio Supply Crate (Opt-in only, max 2/d)│
-│    (Ad Monetized) │ Delivers small gunpowder drop when critically low  │
-├───────────────────┼────────────────────────────────────────────────────┤
-│ 3. Micro-IAPs     │ Base Architectural Themes & Survivor Outfits       │
-│    (Direct Buy)   │ Zero stat buffs; pure visual identity & camp pride │
-├───────────────────┼────────────────────────────────────────────────────┤
-│ 4. Anti-Patterns  │ NO energy meters gating gameplay                   │
-│    EXCLUDED       │ NO pay-to-win stat weapons in loot boxes          │
-│                   │ NO pay-to-skip mandatory timers on basic crafting  │
-└───────────────────┴────────────────────────────────────────────────────┘
-```
+| Monetization Layer | Mechanic & Value Proposition | Player Experience Guardrail |
+| :--- | :--- | :--- |
+| **1. Battle Pass** *(Core Revenue)* | **"Outpost Supply Log"** ($9.99/month)<br>80% Cosmetics (Timber Bunker skins, weapon wraps)<br>20% Convenience (Expanded stash slots, camp flags) | No exclusive stat-boost weapons. All gameplay items are earnable via free progression. |
+| **2. Rewarded Ads** *(Ad Monetized)* | **Emergency Radio Supply Crate** (Opt-in only, max 2/day)<br>Delivers small gunpowder/wood drop when critically low | 100% voluntary; zero interstitial forced popups; never interrupts active combat. |
+| **3. Micro-IAPs** *(Direct Buy)* | **Base Architectural Themes & Survivor Outfits**<br>Pure aesthetic customizability & camp pride | Zero stat buffs; purely visual personalization for pride of ownership. |
+| **4. Anti-Patterns** *(Excluded)* | **Hard Protections**: NO energy meters gating runs, NO pay-to-win stat weapons in loot boxes, NO pay-to-skip timers on basic crafting. | Respects player agency; avoids aggressive predatory mobile monetization traps. |
 
 - **Why it avoids feeling like a cash grab**:  
   Players are never blocked from playing by an artificial "stamina/energy" bar. Core survival is 100% skill- and resource-driven. Monetization leans on cosmetic camp pride (customizing the look and atmosphere of your sanctuary) and non-coercive rewarded ads that function as thematic "emergency radio distress crates."
@@ -131,14 +118,14 @@ flowchart TD
 1. **Decoupled Architecture Partner**:  
    Used LLM-assisted paired programming to design and audit the zero-dependency `EventBus` architecture. This eliminated tight coupling between `PlayerShooting.cs`, `CraftingSystem.cs`, `WaveManager.cs`, and `HUDManager.cs`, allowing rapid feature additions without regression bugs.
 2. **Mathematical Balance Simulation**:  
-   AI models were used to write simulation scripts balancing the world economy: calculating total map resource node yields ($32\text{ nodes} = 160\text{ Wood}, 80\text{ Scrap}, 32\text{ Powder}$) against the zombie wave scaling curve ($N_d = 10 + 4(d-1)$). This ensured that a player hitting $\ge 65\%$ of their shots always has a mathematically viable ammo economy on any given day.
+   AI models were used to write simulation scripts balancing the world economy: calculating total map resource node yields (32 nodes = 160 Wood, 80 Scrap, 32 Gunpowder) against the zombie wave scaling curve ($N_d = 10 + 4(d-1)$). This ensured that a player hitting ≥ 65% of their shots always has a mathematically viable ammo economy on any given day.
 3. **Raycast Sweeping & Physics Tunneling Debugging**:  
-   Rapidly refactored the projectile collision system from discrete point checks to a forward `Physics.SphereCastAll` sweep ($0.35\text{m}$ radius), eliminating projectile tunneling bugs on high-speed shots against moving zombie colliders.
+   Rapidly refactored the projectile collision system from discrete point checks to a forward `Physics.SphereCastAll` sweep (0.35m radius), eliminating projectile tunneling bugs on high-speed shots against moving zombie colliders.
 
 #### B. Is AI Part of the Game Itself? (Crucial for Lila Games)
 Yes — *Dead Dawn* implements a systemic **Dynamic Director AI** (`WaveManager.cs` & `ZombieController.cs`):
 - **Acoustic & Threat-Vector Pacing**:  
-  Zombies do not possess omniscient awareness. They track acoustic impulses (gunshots fired within $18\text{m}$) and visual line-of-sight. If a player sneaks quietly, ambient roamers ignore them.
+  Zombies do not possess omniscient awareness. They track acoustic impulses (gunshots fired within 18m) and visual line-of-sight. If a player sneaks quietly, ambient roamers ignore them.
 - **Strategic Fortress Awareness**:  
   Zombies outside do not mindlessly beat on walls. If and only if an enemy witnesses the player retreat inside the base perimeter (`sawPlayerEnterBase == true`), the Director switches that zombie's state to **Breach Protocol**, commanding it to pathfind to the nearest blocking palisade section or gate.
 - **Future AI Roadmap (Generative Director)**:  
@@ -159,15 +146,15 @@ flowchart LR
 - **What to Test First**:  
   The 90-second FTUE (First-Time User Experience) loop without a text tutorial: Can a blind playtester scavenge 5 wood, build the North Wall, craft 10 bullets, and survive the first night without reading an instruction card? If the visceral affordances don't communicate the loop immediately, nothing else matters.
 - **The Numbers to Watch at Soft Launch**:
-  - **D1 Retention**: Benchmark target $\ge 42\%$.
-  - **D7 Retention**: Benchmark target $\ge 16\%$.
-  - **D30 Retention**: Benchmark target $\ge 7\%$.
-  - **Average Daily Session Frequency**: $3.5\text{ sessions/day}$ at $7\text{–}9\text{ minutes/session}$ (aligning with two full Day/Night cycles).
-  - **D1 Crafting Conversion**: $\ge 85\%$ of new players opening the workbench and crafting at least one item before their first death.
+  - **D1 Retention**: Benchmark target ≥ 42%.
+  - **D7 Retention**: Benchmark target ≥ 16%.
+  - **D30 Retention**: Benchmark target ≥ 7%.
+  - **Average Daily Session Frequency**: 3.5 sessions/day at 7–9 minutes/session (aligning with two full Day/Night cycles).
+  - **D1 Crafting Conversion**: ≥ 85% of new players opening the workbench and crafting at least one item before their first death.
 - **Kill Criteria (When to Kill or Pivot)**:
-  1. *Retention Collapse*: If D1 retention is $<36\%$ after two major FTUE friction revisions.
-  2. *Excessive Acquisition Cost*: If blended CPI in Tier-1 test markets (US, CA, UK) exceeds $\$2.40$ on standard gameplay video creatives.
-  3. *Core Fantasy Mismatch*: If analytics show $>40\%$ of player dropouts occur during the Scavenge phase due to combat frustration rather than the anticipation of base defense.
+  1. *Retention Collapse*: If D1 retention is < 36% after two major FTUE friction revisions.
+  2. *Excessive Acquisition Cost*: If blended CPI in Tier-1 test markets (US, CA, UK) exceeds $2.40 on standard gameplay video creatives.
+  3. *Core Fantasy Mismatch*: If analytics show > 40% of player dropouts occur during the Scavenge phase due to combat frustration rather than the anticipation of base defense.
 
 ---
 
@@ -231,7 +218,7 @@ Yet, every dedicated mobile attempt to build an extraction shooter—most notabl
 2. **Touchscreen Cognitive Overload**:  
    *Arena Breakout* ported the entire PC simulation to touch controls: independent buttons for leaning left/right, checking chamber, packing magazines bullet-by-bullet, applying tourniquets to individual limbs, and dragging 1x2 ammo boxes inside 4x4 backpacks. On a 6.1-inch iPhone screen, this results in thumb fatigue and severe visual occlusion.
 3. **The Brutal "Gear-Fear Death Spiral"**:  
-   In hardcore extraction, losing all your gear creates thrill for PC enthusiasts with 4-hour evening gaming blocks. On mobile, where casual-to-midcore players seek quick dopamine and tangible progress, losing your hard-earned loadout in a 20-second lag spike causes immediate, permanent uninstalls. D7 retention collapses below $10\%$.
+   In hardcore extraction, losing all your gear creates thrill for PC enthusiasts with 4-hour evening gaming blocks. On mobile, where casual-to-midcore players seek quick dopamine and tangible progress, losing your hard-earned loadout in a 20-second lag spike causes immediate, permanent uninstalls. D7 retention collapses below 10%.
 
 #### 3. The Blueprint for a Breakout Hit: "Pocket Extraction"
 To crack this genre on mobile, a studio must preserve the emotional core (risk, scavenging greed, extraction tension) while completely redesigning the input and session architecture for mobile reality:
@@ -262,7 +249,7 @@ flowchart TD
 - **The "Syndicate Patron" Retention Engine (Eliminating the Gear-Fear Cliff)**:  
   Instead of letting bankrupt players hit rock bottom and quit, introduce an in-game faction patron system:
   - If a player loses all gear, a Syndicate Patron provides a free basic tactical kit.
-  - In exchange, the Patron claims a $35\%$ tithe on extracted salvage from that run.
+  - In exchange, the Patron claims a 35% tithe on extracted salvage from that run.
   - The player stays in the loop, retains agency, and never faces an unplayable zero-resource state.
 
 ---
@@ -310,7 +297,7 @@ The feature's user experience, in-run upgrade integration, and evolution matrix 
 
 #### Individual Screen Wireframes
 - **Wireframe 1: In-Game Combat & Active Vector Grid** (`./Screenshots/Screen_1_InGame_Vector_Grid.png`)  
-  Displays the player character kiting outward while 3 deployed cyan Pylons ($P_1, P_2, P_3$) form an energetic containment triangle enclosing 18 swarmers taking 380 Shock DPS.
+  Displays the player character kiting outward while 3 deployed cyan Pylons ($P_1$, $P_2$, $P_3$) form an energetic containment triangle enclosing 18 swarmers taking 380 Shock DPS.
 - **Wireframe 2: Mid-Run Upgrade Selection Modal** (`./Screenshots/Screen_2_MidRun_Upgrade_Modal.png`)  
   Shows the level-up card draw with the featured card: `Kinetic Conduit (Rank 2: Triangulation)` displaying stat bonuses, tether damage, and evolutionary synergy requirements.
 - **Wireframe 3: Super-Weapon Evolution & System Intent** (`./Screenshots/Screen_3_Evolution_Matrix.png`)  
@@ -329,12 +316,12 @@ When an enemy unit intersects any active vector beam connecting two pylons, it r
 
 $$D_{\text{line}} = \left( B_{\text{line}} \times \left(1 + \beta \cdot L_{\text{rank}}\right) \right) \times \left(1 + \frac{V_{\text{rel}}}{V_{\text{base}}}\right) \times \Delta t$$
 
-- $B_{\text{line}}$ = Base Vector Tick Damage ($60\text{ DPS}$).
-- $\beta$ = Rank Damage Multiplier ($0.25$ per rank).
-- $L_{\text{rank}}$ = Current upgrade rank ($1$ through $5$).
-- $V_{\text{rel}}$ = Relative crossing velocity of the enemy perpendicular to the beam.
-- $V_{\text{base}}$ = Normal enemy movement speed ($3.0\text{ m/s}$).
-- $\Delta t$ = Physics tick time ($0.1\text{s}$ interval).
+- **$B_{\text{line}}$**: Base Vector Tick Damage (60 DPS).
+- **$\beta$**: Rank Damage Multiplier (+0.25 / +25% per rank).
+- **$L_{\text{rank}}$**: Current upgrade rank (1 through 5).
+- **$V_{\text{rel}}$**: Relative crossing velocity of the enemy perpendicular to the beam.
+- **$V_{\text{base}}$**: Normal enemy movement speed (3.0 m/s).
+- **$\Delta t$**: Physics tick time (0.1s interval).
 - *Design Intent*: Fast-charging swarmers take exponentially greater damage when attempting to break through the laser tether.
 
 ##### Formula 2: Resonance Collapse Enclosure Damage ($D_{\text{collapse}}$)
@@ -342,13 +329,13 @@ When a closed polygon is successfully formed, all enemies contained within the p
 
 $$D_{\text{collapse}} = \left( B_{\text{burst}} \times L_{\text{rank}} \right) \times \left(1 + \alpha \cdot \min(N_{\text{trapped}}, N_{\text{cap}})\right)^{1.15} \times \left(\frac{A_{\text{poly}}}{A_{\text{base}}}\right)^{0.5}$$
 
-- $B_{\text{burst}}$ = Base collapse burst ($150\text{ damage}$).
-- $N_{\text{trapped}}$ = Count of enemy units caught inside the polygon.
-- $N_{\text{cap}}$ = Maximum scaling cap ($50\text{ units}$ to prevent infinite mathematical runaway).
-- $\alpha$ = Horde Density Multiplier ($0.08$).
-- $A_{\text{poly}}$ = Computed surface area of the enclosed polygon ($\text{m}^2$).
-- $A_{\text{base}}$ = Standard reference enclosure area ($25.0\text{ m}^2$).
-- *Design Intent*: Enclosing 25 enemies delivers over $+340\%$ more burst damage than enclosing 5 enemies, fiercely rewarding high-risk boundary kiting.
+- **$B_{\text{burst}}$**: Base collapse burst (150 damage).
+- **$N_{\text{trapped}}$**: Count of enemy units caught inside the polygon.
+- **$N_{\text{cap}}$**: Maximum scaling cap (50 units to prevent infinite mathematical runaway).
+- **$\alpha$**: Horde Density Multiplier (0.08).
+- **$A_{\text{poly}}$**: Computed surface area of the enclosed polygon ($\text{m}^2$).
+- **$A_{\text{base}}$**: Standard reference enclosure area ($25.0\text{ m}^2$).
+- *Design Intent*: Enclosing 25 enemies delivers over +340% more burst damage than enclosing 5 enemies, fiercely rewarding high-risk boundary kiting.
 
 ---
 
@@ -356,12 +343,12 @@ $$D_{\text{collapse}} = \left( B_{\text{burst}} \times L_{\text{rank}} \right) \
 
 | Upgrade Rank | In-Game Name | Primary Attribute Unlocks | Synergy Tag |
 | :---: | :--- | :--- | :--- |
-| **Rank 1** | *Dipole Spike* | Deploys 2 persistent pylons. Creates a single cutting laser beam ($120\text{ DPS}$). | Base Weapon |
-| **Rank 2** | *Triangulation* | Deploys 3rd pylon. Completes triangle; unlocks **Resonance Collapse** ($180\text{ Burst}$). | Area $+30\%$ |
-| **Rank 3** | *Superconductor* | Beam contact slow effect: enemies crossing lose $30\%$ movement speed for $2.5\text{s}$. | Crowd Control |
+| **Rank 1** | *Dipole Spike* | Deploys 2 persistent pylons. Creates a single cutting laser beam (120 DPS). | Base Weapon |
+| **Rank 2** | *Triangulation* | Deploys 3rd pylon. Completes triangle; unlocks **Resonance Collapse** (180 Burst). | Area +30% |
+| **Rank 3** | *Superconductor* | Beam contact slow effect: enemies crossing lose 30% movement speed for 2.5s. | Crowd Control |
 | **Rank 4** | *Tesla Harmonics* | Auto-attacks targeting any pylon chain lightning to all other connected pylons. | Chain Lightning |
-| **Rank 5** | *Quantum Anchor* | Deploys 4th pylon (Quadrilateral Grid); increases enclosure duration by $+50\%$. | Max Rank |
-| **EVO** | **Tesla Singularity Matrix** | **Synthesis**: Kinetic Conduit Rank 5 + Overcharge Capacitor (Passive). Collapses enclosure into a gravitational vortex dragging all non-boss units to center, exploding for $650\text{ AoE Blast}$. | **Super-Weapon** |
+| **Rank 5** | *Quantum Anchor* | Deploys 4th pylon (Quadrilateral Grid); increases enclosure duration by +50%. | Max Rank |
+| **EVO** | **Tesla Singularity Matrix** | **Synthesis**: Kinetic Conduit Rank 5 + Overcharge Capacitor (Passive). Collapses enclosure into a gravitational vortex dragging all non-boss units to center, exploding for 650 AoE Blast. | **Super-Weapon** |
 
 ---
 
@@ -379,39 +366,28 @@ stateDiagram-v2
 ```
 
 1. **State 1: Deployed**:  
-   Triggered on fixed travel distance interval ($12\text{ meters}$). Pylon drops at player's foot position.
+   Triggered on fixed travel distance interval (12 meters). Pylon drops at player's foot position.
 2. **State 2: Arming (0.40s duration)**:  
-   Pylon extends vertical antennae; plays low hum audio cue ($180\text{ Hz}$); collider is inactive.
+   Pylon extends vertical antennae; plays low hum audio cue (180 Hz); collider is inactive.
 3. **State 3: Active**:  
-   Performs 2D planar Delaunay triangulation search for nearest sibling pylons within $16\text{m}$. Fires energetic beam lasers along valid connection vectors.
+   Performs 2D planar Delaunay triangulation search for nearest sibling pylons within 16m. Fires energetic beam lasers along valid connection vectors.
 4. **State 4: Overcharged (Enclosure Detected)**:  
    Ray-casting algorithm verifies closed loop. Entire interior ground area illuminates with an energetic cyan tessellation grid.
 5. **State 5: Collapsing (Detonation)**:  
-   Interior enemies implode inward; damage popups trigger in electric cyan text; plays high-frequency release audio ($880\text{ Hz}$).
+   Interior enemies implode inward; damage popups trigger in electric cyan text; plays high-frequency release audio (880 Hz).
 6. **State 6: Depleted**:  
-   Pylon anchors dissolve via dissolve shader over $0.5\text{s}$ and return to `ObjectPool.cs`.
+   Pylon anchors dissolve via dissolve shader over 0.5s and return to `ObjectPool.cs`.
 
 ---
 
 #### 3.4 Audio, Visual & Haptic Feedback Matrix
 
-```
-┌─────────────────┬─────────────────┬──────────────────┬─────────────────┐
-│ State Trigger   │ Audio Cue (SFX) │ VFX Particles    │ Haptic Feedback │
-├─────────────────┼─────────────────┼──────────────────┼─────────────────┤
-│ Pylon Drop      │ Heavy metallic  │ Dust puff ring + │ Light impact    │
-│                 │ thud (120 Hz)   │ ground sparks    │ (15ms, 40% amp) │
-├─────────────────┼─────────────────┼──────────────────┼─────────────────┤
-│ Vector Tether   │ High-voltage arc│ Cyan laser beam  │ Sharp tick      │
-│ Connection      │ snap (2.4 kHz)  │ with core pulse  │ (8ms, 30% amp)  │
-├─────────────────┼─────────────────┼──────────────────┼─────────────────┤
-│ Triangle Close  │ Rising harmonic │ Ground grid glow │ Double buzz     │
-│ (Enclosure)     │ chord (440-880) │ + energy dome    │ (40ms, 70% amp) │
-├─────────────────┼─────────────────┼──────────────────┼─────────────────┤
-│ Resonance       │ Thunderous implo│ Particle implosion│ Heavy rumble   │
-│ Collapse Burst  │ sion crack (80Hz│ + shockwave ring │ (120ms, 100%)   │
-└─────────────────┴─────────────────┴──────────────────┴─────────────────┘
-```
+| State Trigger | Audio Cue (SFX) | VFX Particles | Haptic Feedback |
+| :--- | :--- | :--- | :--- |
+| **Pylon Drop** | Heavy metallic thud (120 Hz) | Dust puff ring + ground sparks | Light impact (15ms, 40% amp) |
+| **Vector Tether Connection** | High-voltage arc snap (2.4 kHz) | Cyan laser beam with core pulse | Sharp tick (8ms, 30% amp) |
+| **Triangle Close (Enclosure)** | Rising harmonic chord (440–880 Hz) | Ground grid glow + energy dome | Double buzz (40ms, 70% amp) |
+| **Resonance Collapse Burst** | Thunderous implosion crack (80 Hz) | Particle implosion + shockwave ring | Heavy rumble (120ms, 100% amp) |
 
 ---
 
@@ -421,7 +397,7 @@ stateDiagram-v2
 - **Off-Screen Culling & Mobile Battery Optimization**:  
   Pylons outside the main camera frustum disable costly particle systems (`ParticleSystem.Stop()`) and maintain pure mathematical line-intersection checks in CPU memory.
 - **Boss Unit Immunities**:  
-  Bosses and mini-bosses cannot be pulled by the Singularity vortex or one-shotted by Resonance Collapse. Instead, they receive a flat $+50\%$ damage vulnerability debuff and a $-30\%$ speed penalty while inside the enclosure.
+  Bosses and mini-bosses cannot be pulled by the Singularity vortex or one-shotted by Resonance Collapse. Instead, they receive a flat +50% damage vulnerability debuff and a -30% speed penalty while inside the enclosure.
 - **Object Pooling**:  
   Pylon GameObjects, vector line renderers, and damage popup text instances utilize pre-allocated pools (`ObjectPool.cs`, capacity: 30), generating zero garbage collection (`GC.Alloc`) spikes during intense swarm waves.
 
@@ -447,8 +423,8 @@ To tune the balance curve during soft launch, the following telemetry events are
 ```
 
 - **Key Performance Ratios Monitored**:
-  - `Collapse_Efficiency_Ratio`: Total damage dealt via Resonance Collapse divided by total run damage. Healthy target range: $22\%\text{ – }34\%$.
-  - `Risk_Failure_Rate`: Percentage of runs where player died within $3.0\text{s}$ of deploying a pylon. If $>18\%$, deployment distance or slow penalty is too punishing.
+  - `Collapse_Efficiency_Ratio`: Total damage dealt via Resonance Collapse divided by total run damage. Healthy target range: 22% – 34%.
+  - `Risk_Failure_Rate`: Percentage of runs where player died within 3.0s of deploying a pylon. If > 18%, deployment distance or slow penalty is too punishing.
 
 ---
 

@@ -1,0 +1,21 @@
+================================================================================
+DEAD DAWN: ZOMBIE SURVIVAL MOBILE — LILA GAMES SUBMISSION LINKS
+================================================================================
+
+1. PLAYABLE WEB LINK (1-Click Browser Play, nothing to install):
+   https://sub0dh23.github.io/Zombie-Survival-Mobile/
+   (Alternative Itch.io mirror if preferred: upload Dead_Dawn_WebGL.zip to itch.io)
+
+2. GITHUB CODE REPOSITORY:
+   https://github.com/Sub0dh23/Zombie-Survival-Mobile.git
+   Branch: main
+   Primary Scene: Assets/Scenes/MainGame.unity
+
+3. WRITTEN ASSIGNMENT DOSSIER:
+   - Full PDF: Dead_Dawn_Lila_Games_Submission.pdf (included in Google Drive folder)
+   - Source Markdown: LILA_GAMES_ASSIGNMENT_SUBMISSION.md
+
+4. ENGINE & DESIGN TOOLS:
+   - Engine: Unity 6 (6000.x) — Universal Render Pipeline (URP)
+   - UI Design & Wireframe Suite: Figma Desktop + Antigravity Bridge
+================================================================================

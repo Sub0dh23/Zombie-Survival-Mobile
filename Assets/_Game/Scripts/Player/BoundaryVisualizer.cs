@@ -85,6 +85,7 @@ namespace DeadDawn.Player
 
         private void LoadMaterials()
         {
+#if UNITY_EDITOR
             if (postMaterial == null)
             {
                 postMaterial = UnityEditor.AssetDatabase.LoadAssetAtPath<Material>("Assets/_Game/Materials/MAT_Wood.mat");
@@ -92,6 +93,17 @@ namespace DeadDawn.Player
             if (railMaterial == null)
             {
                 railMaterial = UnityEditor.AssetDatabase.LoadAssetAtPath<Material>("Assets/_Game/Materials/MAT_Scrap.mat");
+            }
+#endif
+            if (postMaterial == null)
+            {
+                var s = Shader.Find("Universal Render Pipeline/Lit") ?? Shader.Find("Standard") ?? Shader.Find("Diffuse");
+                if (s != null) postMaterial = new Material(s) { color = new Color(0.45f, 0.28f, 0.15f) };
+            }
+            if (railMaterial == null)
+            {
+                var s = Shader.Find("Universal Render Pipeline/Lit") ?? Shader.Find("Standard") ?? Shader.Find("Diffuse");
+                if (s != null) railMaterial = new Material(s) { color = new Color(0.35f, 0.38f, 0.42f) };
             }
             if (boundaryLineMaterial == null)
             {

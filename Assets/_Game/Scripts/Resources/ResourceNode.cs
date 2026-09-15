@@ -18,6 +18,14 @@ namespace DeadDawn.ResourceSystems
         private Vector3 basePosition;
         private bool isHarvested = false;
 
+        private void Awake()
+        {
+            if (TryGetComponent<SphereCollider>(out var sphere))
+            {
+                sphere.radius = harvestRadius;
+            }
+        }
+
         private void Start()
         {
             basePosition = transform.position;
